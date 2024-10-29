@@ -3,7 +3,7 @@ use std::fmt::Debug;
 use bitflags::Flags;
 use serde::{Deserialize, Serialize};
 
-pub trait AsPacketKind: Flags + Debug + Send + Sync {}
+pub trait AsPacketKind: Flags + Clone + Copy + Debug + Send + Sync {}
 
 pub trait AsPacketSend: Serialize + Send + Sync {}
 
