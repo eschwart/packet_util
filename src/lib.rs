@@ -3,15 +3,15 @@ use std::fmt::Debug;
 use bitflags::Flags;
 use serde::{Deserialize, Serialize};
 
-pub trait AsPacketKind: Flags + Debug {}
+pub trait AsPacketKind: Flags + Debug + Send + Sync {}
 
-pub trait AsPacketSend: Serialize {}
+pub trait AsPacketSend: Serialize + Send + Sync {}
 
-pub trait AsPacketRecv<'a, K: AsPacketKind>: Deserialize<'a> {
+pub trait AsPacketRecv<'a, K: AsPacketKind>: Deserialize<'a> + Send + Sync {
     fn kind(&self) -> K;
 }
 
-pub trait AsPacket<'a, K: AsPacketKind>: AsPacketSend + AsPacketRecv<'a, K> {
+pub trait AsPacket<'a, K: AsPacketKind>: AsPacketSend + AsPacketRecv<'a, K> + Send + Sync {
     type Kind;
 }
 
