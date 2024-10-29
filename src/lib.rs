@@ -7,6 +7,14 @@ pub trait AsPacketKind: Flags + Debug {}
 
 pub trait AsPacketSend: Serialize {}
 
-pub trait AsPacketRecv<'a, T: AsPacketKind>: Deserialize<'a> {
-    fn kind(&self) -> T;
+pub trait AsPacketRecv<'a, K: AsPacketKind>: Deserialize<'a> {
+    fn kind(&self) -> K;
+}
+
+pub trait AsPacket<'a, K: AsPacketKind>: AsPacketSend + AsPacketRecv<'a, K> {
+    type Kind;
+}
+
+impl<'a, K: AsPacketKind, T: AsPacketSend + AsPacketRecv<'a, K>> AsPacket<'a, K> for T {
+    type Kind = K;
 }
