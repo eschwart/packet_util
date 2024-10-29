@@ -11,7 +11,10 @@ pub trait AsPacketRecv<'a, K: AsPacketKind>: Deserialize<'a> + Send + Sync {
     fn kind(&self) -> K;
 }
 
-pub trait AsPacket<'a, K: AsPacketKind>: AsPacketSend + AsPacketRecv<'a, K> + Send + Sync {
+pub trait AsPacket<'a, K: AsPacketKind>: AsPacketSend + AsPacketRecv<'a, K> + Send + Sync
+where
+    Self::Kind: AsPacketKind,
+{
     type Kind;
 }
 
