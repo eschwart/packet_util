@@ -1,15 +1,15 @@
 [package]
 name = "packet_util"
 version = "0.1.6"
-edition = "2021"
+edition = "2024"
 license = "MIT"
-authors = ["Evan Schwartzentruber <evandotschwartzentruber@gmail.com>"]
+authors = ["Evan Schwartzentruber <ejsch03@gmail.com>"]
 description = "Trait implementation for packet_enum"
 exclude = [".github/", ".gitignore", "LICENSE", "README.md", "tests/"]
 
 [dependencies]
-bitflags = "2.6.0"
-serde = "1.0.214"
+bitflags = "2.9.1"
+serde = "1.0.219"
 
 [profile.release]
 lto = true
